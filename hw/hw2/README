@@ -1,0 +1,9 @@
+README
+===
+
+**Exp1**
+
+   Break the sentence and tokenize it with the following command:
+
+		Usage:   ./preprocess.sh sample-training-data.txt > out.txt
+
