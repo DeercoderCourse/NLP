@@ -1,0 +1,6 @@
+README
+===
+
+Due to limited time, I didn't write the training/test file input, but just to hard-coded, and also trained 4 models without specifying the n value of the gram, but it's also hard-coded and can be improved.
+
+Some bugs are exists for the n-gram matching, especially the string part.
