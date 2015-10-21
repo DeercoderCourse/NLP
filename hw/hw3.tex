@@ -72,24 +72,24 @@ $$ Entropy(C,S)  = \sum_{i}{\frac{|c_i|}{n} \sum_{j}{\frac{|c_i \bigcap s_j|}{|c
 In the equation, $c_i$ is a cluster from $C$, and $s_j$ is a cluster from solution $S$, so we can get the entropy as follows:
 
 \begin{flalign*}
-entropy &= \sum_{i \in C}{\sum_{j \in S}{\frac{|c_i \bigcap s_j|}{|c_i|} \log{\frac{|c_i \bigcap s_j|}{|c_i|}}}} \\
-&= (\frac{2}{4} * \log_2{\frac{2}{4}} * 2 + 0 + 0) + (0 + \frac{1}{4} * \log_2{\frac{1}{4}} +\frac{2}{3} * \log_2{\frac{2}{3}} + 0 ) \\
-&+ (0 + \frac{1}{2} * \log_2{\frac{1}{2}} * 2 + 0) + (\frac{1}{1} * \log_2{\frac{1}{1}} + 0 + 0 + 0) \\
-&\approx -2.89
+entropy &= \sum_{i \in C}{\frac{|c_i|}{n} \sum_{j \in S}{\frac{|c_i \bigcap s_j|}{|c_i|} \log{\frac{|c_i \bigcap s_j|}{|c_i|}}}} \\
+&= \frac{1}{10} * [(\frac{2}{4} * \log_2{\frac{2}{4}} * 2 + 0 + 0) * 4 + (0 + \frac{1}{3} * \log_2{\frac{1}{3}} +\frac{2}{3} * \log_2{\frac{2}{3}} + 0 ) * 3 \\
+&+ (0 + \frac{1}{2} * \log_2{\frac{1}{2}} * 2 + 0) * 2 + (\frac{1}{1} * \log_2{\frac{1}{1}} + 0 + 0 + 0) * 1] \\
+&\approx -0.88
 \end{flalign*}
 
-Regarding the entropy, we have to get the negative value of the above equation, which should be \underline{\textbf{2.89}}
+Regarding the entropy, we have to get the negative value of the above equation, which should be \underline{\textbf{0.88}}
 
 Similarly, we can get the second clustering solutions, as follows:
 
 \begin{flalign*}
-entropy &= \sum_{i \in C}{\sum_{j \in S}{\frac{|c_i \bigcap s_j|}{|c_i|} \log{\frac{|c_i \bigcap s_j|}{|c_i|}}}} \\
-&= (\frac{3}{4} * \log_2{\frac{3}{4}} + \frac{1}{4} * \log_2{\frac{1}{4}})  + (\frac{2}{3} * \log_2{\frac{2}{3}} + \frac{1}{3} * \log_2{\frac{1}{3}}) \\
-&+ (\frac{1}{3} * \log_2{\frac{1}{3}} * 3) \\
-&\approx -3.31
+entropy &= \sum_{i \in C}{\frac{|c_i|}{n} \sum_{j \in S}{\frac{|c_i \bigcap s_j|}{|c_i|} \log{\frac{|c_i \bigcap s_j|}{|c_i|}}}} \\
+&= \frac{1}{10} * [ 4 * (\frac{3}{4} * \log_2{\frac{3}{4}} + \frac{1}{4} * \log_2{\frac{1}{4}})  + 3 * (\frac{2}{3} * \log_2{\frac{2}{3}} + \frac{1}{3} * \log_2{\frac{1}{3}}) \\
+&+ 3 * (\frac{1}{3} * \log_2{\frac{1}{3}} * 3)] \\
+&\approx -1.08
 \end{flalign*}
 
-So for the second clustering solution, the entropy is \underline{\textbf{3.31}}
+So for the second clustering solution, the entropy is \underline{\textbf{1.08}}
 
 
 (2) First, we can get the equation as follows:
