@@ -2,11 +2,13 @@
 \usepackage{indentfirst}
 \usepackage[pdftex]{graphicx}
 \usepackage{graphicx}
+\usepackage{listings}
 \usepackage{picture}
 \usepackage{graphics}
 \usepackage{hyperref}
 \usepackage{amsmath} % for argmax
 \usepackage{bm} % used for bolding the equation
+\lstset{language=Python}
 \title{91.542 - Natural Language Processing ~\\ Homework Assignmen 3}
 \author{Chang Liu ~\\ chang\_liu@student.uml.edu}
 
@@ -32,25 +34,29 @@ The basic algorithm is to sort the nodes from low to high, and merge each two el
 (3) First we can build a table that represents all the symbols, representations and its length, as follows:
 
 \begin{center}
-    \begin{tabular}{| l | l | l |}
+    \begin{tabular}{| l | l | l | l |}
     \hline
-    Symbol & Representation & Length \\ \hline
-    a & 0111 & 4 \\ \hline
-    b & 000001 & 6 \\ \hline
-    c & 00001 & 5 \\ \hline
-    d & 01001 & 5 \\ \hline
-    e & 001 & 3 \\ \hline
-    f & 0001 & 4 \\ \hline
-    g & 000000 & 6 \\ \hline
-    h & 01000 & 5 \\ \hline
-    i & 0110 & 4 \\ \hline
-    j & 0101 & 4 \\ \hline
-    space & 1 & 1 \\ \hline
+    Symbol & Representation & Length & Probability \\ \hline
+    a & 0111 & 4 & 8.1\% \\ \hline
+    b & 000001 & 6 & 1.4\%  \\ \hline
+    c & 00001 & 5 & 2.7\% \\ \hline
+    d & 01001 & 5 & 4.2\% \\ \hline
+    e & 001 & 3 & 12.7\% \\ \hline
+    f & 0001 & 4 & 6\% \\ \hline
+    g & 000000 & 6 & 0.7\% \\ \hline
+    h & 01000 & 5 & 4\% \\ \hline
+    i & 0110 & 4 & 7.4\% \\ \hline
+    j & 0101 & 4 & 9\% \\ \hline
+    space & 1 & 1 & 43.8\% \\ \hline
     \end{tabular}
 \end{center}
 
 So the average value is:
-$$ \frac{4+6+5+5+3+4+6+5+4+4+1}{11} = \frac{47}{11} \approx 4.27$$
+\begin{flalign*}
+average &= {4 * 8.1\%+6 * 1.4\%+5 * 2.7\%+5 * 4.2\%+3 * 12.7\%+4 * 6\%}\\
+&+ {6 * 0.7\%+5 * 4\%+4 * 7.4\%+4 * 9\%+1 * 43.8\%} \\ 
+&\approx 2.71
+\end{flalign*}
 
 (4) For entropy, use the following equation and the probability in the table from the question description, we can get the value:
 \begin{flalign*}
@@ -124,7 +130,81 @@ F1-score \approx 0.58
 
 \section{Problem 3. [10 pts] Leave-one-out (LOO) cross-validation}
 
+\textbf{Answer:}
+
+For this five experiments, using Leave-one-out(LOO) cross-validation, we need to calculate the accuracy for each one, and then get the average of them. For experiment (1), (3) and (5), all the labels are predicted correctly, so the accuracy for it is 100\%. But for experiment (2) and (4), the labels are predicted wrong, we can set the smiley face as positive, and the star as negative, then for (2), we can get this table:
+
+\begin{center}
+    \begin{tabular}{| l | l | l |}
+    \hline
+    Items & Positive & Negative \\ \hline
+    actual Positive & 2 & 0  \\ \hline
+    actual Negative & 1 & 2  \\ \hline
+    \end{tabular}
+\end{center}
+
+So the accuracy for the (2) experiment is $$\frac{2+2}{2+2+1} = 80\%$$
+
+The same goes for experiment (4), so the average accuracy is:
+
+$$\frac{100\% + 80\% + 100\% + 80\% + 100\%}{5} = 92\%$$
+
 
 \section{Problem 4. [50 pts] Computing similarity}
+
+\textbf{Answer:}
+
+A. For this problem, I wrote some code to calculate the value since it's too complex to calculate by hand, the output is as appended[see appendix], so the result is:
+
+$$Dice(D_1, D_2) = 0.2745$$
+$$Jaccard(D_1, D_2) = 0.159$$
+$$cos(D_1, D_2) = 0.51$$
+$$Euclidean \quad distance(D_1, D_2) = 7.81$$
+
+B. There are 8 lines in total, and the total lines that appears ``little'' has 3 lines, the total lines occurring ``baby'' is 4. So the probability of occuring ``little'' is 3/8 = 37.5\%
+
+And the probability of occurring ``baby'' is also 4/8 = 50\%
+
+For pointwise mutual information, from the equation here:
+$$I(X;Y) = \sum_{x,y}{p(x,y) * \log{\frac{p(x,y)}{p(x)p(y)}}}$$
+
+Here, p(x) = 37.5\%, p(y)=50\%, p(x,y)=3/8=37.5\%, so the PMI = 0.375. 
+
+\section{Appendix - Code output for P4}
+\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%\%
+D1.count = 24, D1 = ['dance', 'little', 'baby', 'dance', 'up', 'high', 'never', 'mind', 'baby', 'mother', 'is', 'nigh', 'crow', 'and', 'caper', 'caper', 'and', 'crow', 'there', 'little', 'baby', 'there', 'you', 'go'] \\
+
+D2.count = 27, D2 = ['up', 'to', 'the', 'ceiling', 'down', 'to', 'the', 'ground', 'backwards', 'and', 'forwards', 'round', 'and', 'round', 'dance', 'little', 'baby', 'mother', 'will', 'sing', 'with', 'the', 'merry', 'coral', 'ding', 'ding', 'ding'] \\
+
+set1 set(['and', 'caper', 'little', 'there', 'nigh', 'dance', 'crow', 'is', 'never', 'mind', 'up', 'high', 'go', 'mother', 'baby', 'you']) \\
+
+set2 set(['and', 'will', 'ceiling', 'backwards', 'forwards', 'dance', 'coral', 'up', 'down', 'to', 'merry', 'mother', 'baby', 'sing', 'the', 'little', 'with', 'round', 'ding', 'ground']) \\
+
+intersection set(['and', 'little', 'dance', 'up', 'mother', 'baby']) \\
+
+union set(['and', 'ding', 'ceiling', 'nigh', 'dance', 'crow', 'is', 'never', 'mind', 'high', 'baby', 'merry', 'go', 'sing', 'with', 'the', 'ground', 'caper', 'down', 'little', 'backwards', 'forwards', 'coral', 'there', 'up', 'will', 'to', 'mother', 'you', 'round']) \\
+
+union size 30
+
+dict1 {'and': 2, 'caper': 2, 'little': 2, 'never': 1, 'nigh': 1, 'dance': 2, 'crow': 2, 'is': 1, 'there': 2, 'mind': 1, 'up': 1, 'high': 1, 'baby': 3, 'mother': 1, 'go': 1, 'you': 1} \\
+
+dict2 {'and': 2, 'down': 1, 'ceiling': 1, 'backwards': 1, 'forwards': 1, 'dance': 1, 'coral': 1, 'up': 1, 'will': 1, 'to': 2, 'merry': 1, 'mother': 1, 'baby': 1, 'sing': 1, 'the': 3, 'little': 1, 'with': 1, 'round': 2, 'ding': 3, 'ground': 1} \\
+
+total number of common words 7 \\
+
+Dice(D1, D2) 0.274509803922 \\
+Jaccard(D1, D2) 0.159090909091 \\
+
+vec1: {'and': 2, 'ding': 0, 'forwards': 0, 'dance': 2, 'crow': 2, 'is': 1, 'mind': 1, 'high': 1, 'go': 1, 'ground': 0, 'caper': 2, 'little': 2, 'nigh': 1, 'there': 2, 'to': 0, 'you': 1, 'ceiling': 0, 'never': 1, 'merry': 0, 'baby': 3, 'sing': 0, 'with': 0, 'down': 0, 'backwards': 0, 'coral': 0, 'up': 1, 'will': 0, 'mother': 1, 'the': 0, 'round': 0} \\
+
+vec2: {'and': 2, 'ding': 3, 'forwards': 1, 'dance': 1, 'crow': 0, 'is': 0, 'mind': 0, 'high': 0, 'go': 0, 'ground': 1, 'caper': 0, 'little': 1, 'nigh': 0, 'there': 0, 'to': 2, 'you': 0, 'ceiling': 1, 'never': 0, 'merry': 1, 'baby': 1, 'sing': 1, 'with': 1, 'down': 1, 'backwards': 1, 'coral': 1, 'up': 1, 'will': 1, 'mother': 1, 'the': 3, 'round': 2}
+
+total=13, distance1=24, distance2=27 \\
+
+cos 0.510688230857 \\
+
+Euclidean distance 7.81024967591 \\
+
+Jaccard(numeric version) 0.159090909091 \\
 
 \end{document}
