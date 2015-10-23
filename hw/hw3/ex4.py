@@ -72,7 +72,11 @@ print "total number of common words", total_common
 # for dice, just need |D1| and |D2|
 dice = 2 * float(total_common) /(len(list1_reg)+len(list2_reg))
 # this is the common number the D1 and D2 shared
-print "Dice(D1, D2)", dice
+print "Dice(D1, D2)(numberic version)", dice
+dice_non = float(len(intersect)) / len(union)
+print "Dice", dice_non
+
+# for non-numeric dice, just get the union set and their common
 
 
 ## for Jaccard, different from dice, need union of D1 and D2, minus common
@@ -107,8 +111,8 @@ for item in union:
 distance1 = 0
 distance2 = 0
 for item in union:
-    distance1 += vec1[item]
-    distance2 += vec2[item]
+    distance1 += vec1[item] * vec1[item]
+    distance2 += vec2[item] * vec2[item]
 
 # final value for cos
 cos = float(total) / math.sqrt(distance1*distance2)

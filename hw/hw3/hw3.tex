@@ -132,7 +132,12 @@ F1-score \approx 0.58
 
 \textbf{Answer:}
 
-For this five experiments, using Leave-one-out(LOO) cross-validation, we need to calculate the accuracy for each one, and then get the average of them. For experiment (1), (3) and (5), all the labels are predicted correctly, so the accuracy for it is 100\%. But for experiment (2) and (4), the labels are predicted wrong, we can set the smiley face as positive, and the star as negative, then for (2), we can get this table:
+There is some misunderstanding of this question, but I think we can regard it in two ways:
+
+1) This five result is just an experiment with five test set, so we don't need to calculate the average, so for the five test set, there are 3 right predictions and 2 wrong predictions. In all these 5 results, the accuracy is $$\frac{3}{5} = 60\%$$
+
+
+2) This five performs as 5 test experiments, so we need to calculate them and find the average.For this five experiments, using Leave-one-out(LOO) cross-validation, we need to calculate the accuracy for each one, and then get the average of them. For experiment (1), (3) and (5), all the labels are predicted correctly, so the accuracy for it is 100\%. But for experiment (2) and (4), the labels are predicted wrong, we can set the smiley face as positive, and the star as negative, then for (2), we can get this table:
 
 \begin{center}
     \begin{tabular}{| l | l | l |}
@@ -156,9 +161,10 @@ $$\frac{100\% + 80\% + 100\% + 80\% + 100\%}{5} = 92\%$$
 
 A. For this problem, I wrote some code to calculate the value since it's too complex to calculate by hand, the output is as appended[see appendix], so the result is:
 
-$$Dice(D_1, D_2) = 0.2745$$
+$$Dice(D_1, D_2) = 0.2$$
+$$Dice(D_1, D_2)(numberic \quad version) = 0.2745$$
 $$Jaccard(D_1, D_2) = 0.159$$
-$$cos(D_1, D_2) = 0.51$$
+$$cos(D_1, D_2) = 0.299$$
 $$Euclidean \quad distance(D_1, D_2) = 7.81$$
 
 B. There are 8 lines in total, and the total lines that appears ``little'' has 3 lines, the total lines occurring ``baby'' is 4. So the probability of occuring ``little'' is 3/8 = 37.5\%
@@ -192,7 +198,9 @@ dict2 {'and': 2, 'down': 1, 'ceiling': 1, 'backwards': 1, 'forwards': 1, 'dance'
 
 total number of common words 7 \\
 
-Dice(D1, D2) 0.274509803922 \\
+Dice(D1, D2)(numberic version) 0.274509803922
+Dice 0.2
+
 Jaccard(D1, D2) 0.159090909091 \\
 
 vec1: {'and': 2, 'ding': 0, 'forwards': 0, 'dance': 2, 'crow': 2, 'is': 1, 'mind': 1, 'high': 1, 'go': 1, 'ground': 0, 'caper': 2, 'little': 2, 'nigh': 1, 'there': 2, 'to': 0, 'you': 1, 'ceiling': 0, 'never': 1, 'merry': 0, 'baby': 3, 'sing': 0, 'with': 0, 'down': 0, 'backwards': 0, 'coral': 0, 'up': 1, 'will': 0, 'mother': 1, 'the': 0, 'round': 0} \\
@@ -201,7 +209,7 @@ vec2: {'and': 2, 'ding': 3, 'forwards': 1, 'dance': 1, 'crow': 0, 'is': 0, 'mind
 
 total=13, distance1=24, distance2=27 \\
 
-cos 0.510688230857 \\
+cos 0.299028409048 \\
 
 Euclidean distance 7.81024967591 \\
 
