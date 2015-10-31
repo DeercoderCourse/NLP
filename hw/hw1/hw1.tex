@@ -123,19 +123,33 @@ S_{k+1} &= r * \sum_{k=1}^{K}{k * r^k} + r * \sum_{k=1}^{K}{r^n} \\
 		&= r * S_{k} + r^2 / (1-r) % use &= to align the equation symbol
 \end{flalign*}
 
+Now I will deduction the further equation from the above one:
 
-After further transformation, we can conclude that $S_{k} - r^2/(1-r)^2$ is a geometrical sequence, which meets the basic form of
+\begin{flalign*}
+S_{k+1} &= r * S_{k} + r^2 / (1-r) \\
+		&= r * (S_{k} - \frac{r^2}{(1-r)^2}) + r * \frac{r^2}{(1-r)^2} + \frac{r^2}{(1-r)} \\
+		&= r * (S_{k} - \frac{r^2}{(1-r)^2}) + \frac{r^2}{(1-r)^2} \\		
+\end{flalign*}
+
+Now that from the above equation, if I move the right $r$-relate value to the left, I can then get the following equation $$S_{k+1} - \frac{r^2}{(1-r)^2} = r * (S_{k} - \frac{r^2}{(1-r)^2})$$ 
+
+And then we can conclude that $S_{k} - r^2/(1-r)^2$ is a geometrical sequence, which meets the basic form of
 
 \begin{equation*}
 \frac{S_{k+1} - r^2/(1-r)^2}{S_{k} - r^2/(1-r)^2} = r 
 \end{equation*}
 
+Each item of the $S_{k} - \frac{r^2}{(1-r)^2}$ is a multiple of $r$ with the previous one.
 
-Then using the equation to calculate the items for a geometrical sequence, we can get the general form for $S_{k}$. By combining the limitation of the $\sum_{n=1}^{\infty}{r^n} = \frac{r}{1-r}$, we can get the general item:
+According to the questions conclusion, $\sum_{n=1}^{\infty}{r^n} = \frac{r}{1-r}$, the sum of the geometrical sequence with $r^n$, the sum should be $\frac{r}{1-r}$.
 
-\begin{equation*}
-S_{n} - r^2/(1-r)^2 = r * \frac{1}{1-r} 
-\end{equation*}
+Now we have another geometric sequence of $S_{k} - \frac{r^2}{(1-r)^2}$ = $[S_{1} - \frac{r^2}{(1-r)^2}]^{k-1}$. It has similar form of the $r^n$, so we can just replace the variable with similar items, using the equation to calculate the items for a geometrical sequence, we can get the general form for $S_{k}$. By combining the limitation of the $\sum_{n=1}^{\infty}{r^n} = \frac{r}{1-r}$, we can get the general item:
+
+\begin{flalign*}
+S_{n} - r^2/(1-r)^2 &= r * \frac{1}{1-r} \\
+S_{n} &=  r^2/(1-r)^2 + r * \frac{1}{1-r} \\
+	  &= \frac{r}{(1-r)^2}
+\end{flalign*}
 
 So we can get the value of $S_{n}$, as follows:
 	

@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 """
 This is sample code for Homework Assignment #4 in Fall 2015 91.542/91.442
 Natural Language Processing course, @ Computer Science Department @
@@ -47,8 +48,8 @@ def read_corpus(label, label_dir, text_dir):
 
     if not label in categories:
         raise Exception("read_corpus(): Illegal genre category: %s\n" % label +\
-                        "Legal categories are: %s" % categories)        
-    
+                        "Legal categories are: %s" % categories)
+
     positive_fname = "positive_%s.txt" % label
     negative_fname = "negative_%s.txt" % label
 
@@ -56,7 +57,7 @@ def read_corpus(label, label_dir, text_dir):
         positive_f = open(os.path.join(CORPUS_DIR,label_dir,positive_fname))
         negative_f = open(os.path.join(CORPUS_DIR,label_dir,negative_fname))
     except IOError, e:
-        sys.stderr.write("read_corpus(): %s\n" % e)        
+        sys.stderr.write("read_corpus(): %s\n" % e)
 
     # create a dictionary of positive titles, with all labels for each title
     positive_titles = {}
@@ -77,7 +78,7 @@ def read_corpus(label, label_dir, text_dir):
         data = []
         for fname in os.listdir(os.path.join(CORPUS_DIR,text_dir)):
             full_fname = os.path.join(CORPUS_DIR,text_dir,fname)
-            
+
             title = fname[:-4]       # cut away .txt extension
 
             all_labels = []
@@ -96,7 +97,7 @@ def read_corpus(label, label_dir, text_dir):
             instance = Instance(title, text, clabel, all_labels)
 
             data.append(instance)
-        
+
     except IOError, e:
         sys.stderr.write("read_corpus(): %s\n" % e)
 
@@ -118,7 +119,7 @@ def get_data_from_dir_list(dir_list):
 def extract_features(instance):
     """
     Extracts features from an instance.
-    
+
     Args:
        instance: an Instance object
     Returns:
@@ -138,7 +139,7 @@ def make_training_data(data):
     Args:
        data: list of instances
     Returns:
-       [(feature_set, label), ...] 
+       [(feature_set, label), ...]
     """
     training_data=[]
     for instance in data:
@@ -155,7 +156,7 @@ def make_classifier(training_data):
 
 def split_data(data, category, dev_frac=.3):
     # split the data into training and dev-test portions
-    positives = [x for x in data if x.label == category]    
+    positives = [x for x in data if x.label == category]
     negatives = [x for x in data if x.label == 'Not_%s' % category]
 
     random.shuffle(positives)
@@ -177,19 +178,19 @@ if __name__ == '__main__':
     parser.add_argument('category', action='store', type=str,
                         help="One of 10 Genre Categories: %s" % categories)
 
-    args = parser.parse_args()
-    #args = parser.parse_args(['Drama'])
+    #args = parser.parse_args()
+    args = parser.parse_args(['Drama'])
     category = args.category
 
     if not category in categories:
         sys.stderr.write("Illegal genre category: %s\n" % category)
         parser.print_help()
         sys.exit()
-    
+
 
     # load up the training and test data
     training_data = read_corpus(category, 'labels/training', 'records')
-    test_data = read_corpus(category, 'labels/test', 'records')    
+    test_data = read_corpus(category, 'labels/test', 'records')
 
     # split training data into train and dev sets
     training_set, dev_set = split_data(training_data, category, .3)
@@ -201,4 +202,3 @@ if __name__ == '__main__':
     dev_d = make_training_data(dev_set)
     for e in dev_d:
  	print classifier.classify(e[0]), e[1]
-
