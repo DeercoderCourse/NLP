@@ -26,7 +26,7 @@ class Instance(object):
     def __init__(self, title, text, label, all_labels):
         self.title = title
         self.text = text
-        self.label = label
+        self.label = label # for install the label is XXX or Not_XXX, that XXX means the category
         self.all_labels = all_labels
 
     def __repr__(self):
@@ -144,7 +144,7 @@ def make_training_data(data):
     training_data=[]
     for instance in data:
         feature_set = extract_features(instance)
-        label = instance.label
+        label = instance.label # for instace, the label here is clabel, that is Not_XXX or XXX
         training_data.append((feature_set,label))
     return training_data
 
@@ -153,7 +153,7 @@ def make_classifier(training_data):
 
 
 
-
+## split the labelled data into training set/dev set using the factor
 def split_data(data, category, dev_frac=.3):
     # split the data into training and dev-test portions
     positives = [x for x in data if x.label == category]
@@ -169,28 +169,10 @@ def split_data(data, category, dev_frac=.3):
 
     return training_set, dev_set
 
-
-
-if __name__ == '__main__':
-    import argparse
-    import random
-    parser = argparse.ArgumentParser(description='Classify movie categories.')
-    parser.add_argument('category', action='store', type=str,
-                        help="One of 10 Genre Categories: %s" % categories)
-
-    #args = parser.parse_args()
-    args = parser.parse_args(['Drama'])
-    category = args.category
-
-    if not category in categories:
-        sys.stderr.write("Illegal genre category: %s\n" % category)
-        parser.print_help()
-        sys.exit()
-
-
+# evaluate the precison/recall for each category on dev set
+def evaluate_dev_data(category):
     # load up the training and test data
     training_data = read_corpus(category, 'labels/training', 'records')
-    test_data = read_corpus(category, 'labels/test', 'records')
 
     # split training data into train and dev sets
     training_set, dev_set = split_data(training_data, category, .3)
@@ -200,5 +182,143 @@ if __name__ == '__main__':
     classifier = make_classifier(train_d)
 
     dev_d = make_training_data(dev_set)
+    true_positive = 0
+    true_negative = 0
+    false_positive = 0
+    false_negative = 0
     for e in dev_d:
- 	print classifier.classify(e[0]), e[1]
+           predict = classifier.classify(e[0])
+           actual = e[1]
+           print "predict:%s, actual:%s"%(predict, actual)
+           
+           # negative
+           if e[1][:3] == 'Not':
+               if e[1] == predict:
+                   true_negative += 1
+               else:
+                   false_negative += 1
+           # positive
+           else:
+               if e[1] == predict:
+                   true_positive += 1
+               else:
+                   false_positive += 1
+    
+    print "true_positive = %s, true_negative = %s" %(true_positive, true_negative)
+    print "false_positive = %s, false_negative = %s" % (false_positive, false_negative)
+    recall_pos =  true_positive * 1.0 / (true_positive + false_negative)
+    recall_neg = true_negative * 1.0 / (true_negative + false_positive)
+    precision_pos =  true_positive * 1.0 / (true_positive + false_positive)
+    precision_neg =  true_negative * 1.0 / (true_negative + false_negative)
+    
+    if precision_pos + recall_pos != 0:
+        fmeasure_pos = 2.0 * precision_pos * recall_pos / (precision_pos + recall_pos)
+    else:
+        fmeasure_pos = None
+    if precision_neg + recall_neg != 0:
+        fmeasure_neg = 2.0 * precision_neg * recall_neg / (precision_neg + recall_neg)
+    else:
+        fmeasure_neg = None
+    
+    accuracy = (true_positive + true_negative) * 1.0 / (true_negative + true_negative + false_negative + false_positive)
+    error_rate =  1 - accuracy
+
+    print "For category: %s" % (category)
+    print "Positive, precision = %s, recall = %s, f-score = %s " % (precision_pos, recall_pos, fmeasure_pos)
+    print "Negative, precision = %s, recall = %s, f-score = %s " % (precision_neg, recall_neg, fmeasure_neg)
+    print "Total Accuracy = %s, Error rate = %s" % ("{:.2%}".format(accuracy), "{:.2%}".format(error_rate))
+             
+def evaluate_test_data(category):
+    # load up the training and test data
+    training_data = read_corpus(category, 'labels/training', 'records')
+    test_data = read_corpus(category, 'labels/test', 'records')
+
+    # split training data into train and dev sets
+    training_set, dev_set = split_data(training_data, category, .3)
+
+    # get classifier based on training data
+    train_d = make_training_data(training_set)
+    classifier = make_classifier(train_d)
+
+    # do it on test set
+    test_d = make_training_data(test_data)
+    true_positive = 0
+    true_negative = 0
+    false_positive = 0
+    false_negative = 0
+    for e in test_d:
+           predict = classifier.classify(e[0])
+           actual = e[1]
+           print "predict:%s, actual:%s"%(predict, actual)
+           
+           # negative
+           if e[1][:3] == 'Not':
+               if e[1] == predict:
+                   true_negative += 1
+               else:
+                   false_negative += 1
+           # positive
+           else:
+               if e[1] == predict:
+                   true_positive += 1
+               else:
+                   false_positive += 1
+    
+    print "true_positive = %s, true_negative = %s" %(true_positive, true_negative)
+    print "false_positive = %s, false_negative = %s" % (false_positive, false_negative)
+    recall_pos =  true_positive * 1.0 / (true_positive + false_negative)
+    recall_neg = true_negative * 1.0 / (true_negative + false_positive)
+    precision_pos =  true_positive * 1.0 / (true_positive + false_positive)
+    precision_neg =  true_negative * 1.0 / (true_negative + false_negative)
+    
+    if precision_pos + recall_pos != 0:
+        fmeasure_pos = 2.0 * precision_pos * recall_pos / (precision_pos + recall_pos)
+    else:
+        fmeasure_pos = None
+    if precision_neg + recall_neg != 0:
+        fmeasure_neg = 2.0 * precision_neg * recall_neg / (precision_neg + recall_neg)
+    else:
+        fmeasure_neg = None
+    
+    accuracy = (true_positive + true_negative) * 1.0 / (true_negative + true_negative + false_negative + false_positive)
+    error_rate =  1 - accuracy
+
+    print "For category: %s" % (category)
+    print "Positive, precision = %s, recall = %s, f-score = %s " % (precision_pos, recall_pos, fmeasure_pos)
+    print "Negative, precision = %s, recall = %s, f-score = %s " % (precision_neg, recall_neg, fmeasure_neg)
+    print "Total Accuracy = %s, Error rate = %s" % ("{:.2%}".format(accuracy), "{:.2%}".format(error_rate))             
+             
+             
+             
+if __name__ == '__main__':
+    import argparse
+    import random
+    parser = argparse.ArgumentParser(description='Classify movie categories.')
+    parser.add_argument('category', action='store', type=str,
+                        help="One of 10 Genre Categories: %s" % categories)
+
+    #args = parser.parse_args()
+    #args = parser.parse_args(['Drama'])
+    #category = args.category
+    
+    print "*************************** Start of Dev Set *********************************************"
+    print "Now printing all the result for Dev set:"
+    print "NOTE: When F-score is None, then precision and recall both are zero for positive or negative\n"
+
+    for category in categories:
+            evaluate_dev_data(category)
+            print ""
+  
+    print "*************************** End of Dev Set *********************************************"
+  
+    print "*************************** Start of Test Set *********************************************"
+    print "Now printing all the result for Test set:"
+    print "NOTE: When F-score is None, then precision and recall both are zero for positive or negative\n"
+    for category in categories:
+            evaluate_test_data(category)
+            print ""
+    print "*************************** End of Test Set *********************************************"
+
+  
+  
+
