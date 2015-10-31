@@ -60,3 +60,4 @@ target/
 *.log
 *.synctex.gz
 *.out
+*.tar.gz

@@ -1,0 +1,12 @@
+README
+===
+
+
+All of these codes can be run directly without any parameters under the command line, or by pyDev in Eclipse.
+
+In the hw4_initial_feature.py, I implement the initial feature version that works on the dev set, as the 2(b) requires, the initial feature only contains the first word, first letter, last word and last letter.
+
+In hw4.py, I improved the feature by adding the most frequent word and its count, since I think it should helps for different genres, as different genre should have differnt style or content that differs by the frequent word. And I also add the length of the text, as well as the middle word. The length of text should be helpful, since some genre should be short comparing with other genre, and the middel word is just another feature like the intial version that I think should be helpful in increasing feature dimension and add more useful information. And it's tested on the dev set and test set, as 2(d) and 2(e) requires.
+
+Just run and get a look at these two files. I was trying to add some parameter controlling but due to limited time, I just put them in two files. Thanks!
+
