@@ -61,3 +61,13 @@ target/
 *.synctex.gz
 *.out
 *.tar.gz
+
+# convText v2.0
+conText-v2.00/bin/
+conText-v2.00/elec/
+conText-v2.00/unlab_data/
+conText-v2.00/sample/
+*.txt
+*.tok
+*.cat
+*.tar.gz
