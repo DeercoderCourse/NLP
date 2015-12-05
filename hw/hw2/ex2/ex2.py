@@ -210,11 +210,11 @@ def get_unigram_prob(train_model_name, test_file_name, delta):
                 this_item_total_count = model_count[index]
                 # print "this_item_total_count", this_item_total_count
                 this_probability = (this_item_total_count + delta) / (total_count + delta * vocabulary_count)
-                # print this_probability
-        # not in this list(OOV, out of vacabulary), using add-smothing it's 1
-        else:
-            this_count = 0
-            this_probability = 1.0 / vocabulary_count
+            # print this_probability
+            # not in this list(OOV, out of vacabulary), using add-smothing it's 1
+            else:
+                this_count = 0
+                this_probability = 1.0 / vocabulary_count
             line_probability *= this_probability
         # print "line_probability = ", line_probability
 
@@ -389,7 +389,7 @@ if __name__ == "__main__":
         debug()
         test_case()
 
-    n = 6
+    n = 1
     trainfile = 'sample-training-data.txt'
     modelfile = 'modelfile'
     testfile = 'sample-test-data.txt'
@@ -407,4 +407,4 @@ if __name__ == "__main__":
         else:
             likelihood = get_ngram_prob(modelfile, testfile, n, smooth)
 
-        print "ngram_likelihood =", likelihood
+        print "ngram_likelihood(n=%d, smooth=%f) = %f" % (n, smooth, likelihood)
