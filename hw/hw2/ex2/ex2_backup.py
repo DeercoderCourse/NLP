@@ -265,7 +265,7 @@ def get_ngram_prob(train_model_name, test_file_name, n, delta):
                     print "###this_item_total_count", this_item_total_count
                     this_probability = (exact_count + delta) / (this_item_total_count + delta * vocabulary_count)
                     print "###this probability ", this_probability
-            # not in this list, but contain the context(OOV)
+                # not in this list, but contain the context(OOV)
             elif nset[0:n - 1] in [word[0:n - 1] for word in model_gram]:
                 context_total_count = 0
                 for i in model_gram:
@@ -273,13 +273,12 @@ def get_ngram_prob(train_model_name, test_file_name, n, delta):
                         index = model_gram.index(i)
                         tmp_count = model_count[index]
                         context_total_count += tmp_count
-                this_probability = delta / (delta * vocabulary_count + context_total_count)  # /context_total_count
+                    this_probability = delta / (delta * vocabulary_count + context_total_count)  # /context_total_count
             # OOV, all are not exist
             else:
                 this_count = 0
                 this_probability = 1.0 / vocabulary_count
-
-            line_probability *= this_probability
+                line_probability *= this_probability
         print "line_probability = ", math.log(line_probability, 10)
 
         probability += math.log(line_probability, 10)
@@ -336,7 +335,7 @@ def test_case():
     uni_likelihood = get_unigram_prob("output_1_gram.model", "sample-test-data.txt", 0.1)
     bi_likelihood = get_ngram_prob("output_2_gram.model", "sample-test-data.txt", 2, 0.1)
     tri_likelihood = get_ngram_prob("output_3_gram.model", "sample-test-data.txt", 3, 0.1)
-    n_likelihood = get_ngram_prob("output_3_gram.model", "sample-test-data.txt", 3, 0.1)
+    n_likelihood = get_ngram_prob("output_2_gram.model", "sample-test-data.txt", 2, 0.1)
 
     print "unilikelihood = ", uni_likelihood
     print "bi_likelihood = ", bi_likelihood
@@ -384,12 +383,14 @@ def parse_parameter(argv):
 # # Main function, entry for this file
 if __name__ == "__main__":
 
+   # trainfile, testfile, n, modelfile, smooth = parse_parameter(sys.argv[1:])
 
+   # this is to use the training dataset to save models as output_n_gram.model
     if TEST == True:
         debug()
         test_case()
 
-    n = 6
+    n = 3
     trainfile = 'sample-training-data.txt'
     modelfile = 'modelfile'
     testfile = 'sample-test-data.txt'
