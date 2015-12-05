@@ -1,6 +1,9 @@
 README
 ===
 
-Due to limited time, I didn't write the training/test file input, but just to hard-coded, and also trained 4 models without specifying the n value of the gram, but it's also hard-coded and can be improved.
+Training: using `ex2.py --train=sample-training-data.txt --model=modelfile --ngram-length=2`
 
-Some bugs are exists for the n-gram matching, especially the string part.
+Testing: using `ex2.py --test=sample-test-data.txt --model=modelfile --smooth=0.1`
+
+
+Now for convience, I fixed the parameter in the main() function, if you want to execute using other paramters, just modify the assigning of parameter in the function, I think it's not convienent for debugging when inputting so many parameters in the commander line, so just execute by `./ex2.py` is OK now.

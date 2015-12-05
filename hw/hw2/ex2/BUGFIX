@@ -1,0 +1,45 @@
+BUGFIX
+===
+
+Comparing with previous version, I did some major changes to the code(Dec 4th)
+
+1. fix the wrong calculating of the probability:
+    **Before**: I calculate all the probability, then sum them up, and at last use the log() to get final value
+    **Now**: the real probability is use log() to get each sentence's probability, and then sum them up.
+
+2. fix the error parsing the model file
+   Before I used a text file `output_#_gram.model` to save the trained model, but when parsing, some `List` in the
+   data file cannot be recognized, so the probability is set to 1/total_count, which is not correct.
+   I use python's `aset` to parse these parts(before I tried with special case 2gram, bi-gram using my own parsing),
+   and comparing them  to verify.
+
+3. smoothing schema error
+   When using smooth, (count+delta)/(total_condition+delta*V), before I missed the multiple of V, so it's not correct
+   and as 2 shows, the parsing is wrong, so for  n-gram w1w2...wn, when I count the w1...w(n-1), the condition_count
+   is not counted correctly, so it also affect the result
+
+4. preprocessing details
+   Before, for training and testing, I don't capitalize the words or tokens, so like `We` and `we` are two different words,
+   it will slightly affect the probability. So I changed these part and add the  lower() to capitalize
+
+5. add padding part
+   Here I add a padding at the beginning of the senstence when training 2-gram, 3-gram ...,  the character is marked as
+   `<\\`,  before I don't consider this case
+
+6. fix some bugs in the model
+   Before my grams in the model has some bugs, there is abundant items like [`.`, `<\\`, `I`], this is caused by my design
+   at first, I don't generate the grams by sentence, so the dot `.` at the end of sentence appears as the first in this
+   3-gram example, I should remove these items to represent a precise vocabulary.
+
+7. some strategory for OOV(out-of-vacabulary)
+   For ex2, I don't use the 10%/90% division(see ex3.py for division solution), but there is still OOV, so I considered that
+   for  w1w2...wn, if the context is not exist(context means the previous words like w1w2....wn-1), the probability is 1/V,
+   if the context exists, I have to find all the grams that contain the  context in the vocabulary, and get the total count,
+   then I used delta/(total_condition_count + delta * V) to calculate the probability
+
+8. Others
+   other changes include some code refactor and generalization(before I used too-detailed hard-coded code, now I remove them),
+   and I also add the parameter parsing from commander line, some intermediate output is commented to make it look short.
+   And there's also some flags in the code for test case and debugging, but some intial design is complex, so I spend much
+   time in adjusting the parsing, reforming, representation issue. I think I should use upper python libraries to make it
+   work more precise and short.

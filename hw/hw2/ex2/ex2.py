@@ -11,7 +11,7 @@ import sys
 import getopt
 
 DEBUG = True
-TEST = True
+TEST = False
 
 def dbgprint(s):
     if DEBUG:
@@ -50,7 +50,7 @@ def ngram(text, count_n):
     count = 0
     flag = False
 
-    print "#######", text
+    #print "#######", text
     for token in text[:len(text) - count_n + 1]:
         for word in text[count:count + count_n - 1]:
             if word == '.':
@@ -121,7 +121,7 @@ def save_training_model(n, train_file_name, model_name):
             new_padding_gram.append(g)
             if g == '.':
                 new_padding_gram.append('<\\')
-        print "!!!!!text, new_padding", text, new_padding_gram
+        #print "!!!!!text, new_padding", text, new_padding_gram
         grams = bigrams(new_padding_gram)
         bigram, count = get_grams_dict(grams)
         i = 0
@@ -134,7 +134,7 @@ def save_training_model(n, train_file_name, model_name):
             new_padding_gram.append(g)
             if g == '.':
                 new_padding_gram.append('<\\')
-        print "!!!!!text, new_padding", text, new_padding_gram
+        #print "!!!!!text, new_padding", text, new_padding_gram
         grams = trigrams(new_padding_gram)
         trigram, count = get_grams_dict(grams)
         i = 0
@@ -147,7 +147,7 @@ def save_training_model(n, train_file_name, model_name):
             new_padding_gram.append(g)
             if g == '.':
                 new_padding_gram.append('<\\')
-        print "!!!!!text, new_padding", text, new_padding_gram
+        #print "!!!!!text, new_padding", text, new_padding_gram
         grams = ngram(new_padding_gram, n)
         gram, count = get_grams_dict(grams)
         i = 0
@@ -176,7 +176,7 @@ def load_ngram_model(train_model_name):
         grams.append(ast.literal_eval(items[0]))
         counts.append(int(items[1][:-2]))
 
-    print "***********", grams
+    #print "***********", grams
     return grams, counts
 
 
@@ -233,9 +233,9 @@ def get_ngram_prob(train_model_name, test_file_name, n, delta):
     probability = 0
     total_count = sum(model_count)
     vocabulary_count = len(model_count)
-    print "total_count", total_count
-    print "vacabulary_count", vocabulary_count
-    print "!!!model_gram", model_gram
+    #print "total_count", total_count
+    #print "vacabulary_count", vocabulary_count
+    #print "!!!model_gram", model_gram
 
     # get each sentence and calculate the probability
     for line in file_handler:
@@ -247,12 +247,12 @@ def get_ngram_prob(train_model_name, test_file_name, n, delta):
 
         line_probability = 1
         for nset in gram:
-            print "###n-set", nset
+            #print "###n-set", nset
             # item in the model, then get its count and probability
             if nset in model_gram:
                 index = model_gram.index(nset)
                 exact_count = model_count[index]
-                print "###index=%d, count=%d" % (index, exact_count)
+                #print "###index=%d, count=%d" % (index, exact_count)
 
                 # for conditional probability, calculate the parital count
                 this_item_total_count = 0
@@ -262,9 +262,9 @@ def get_ngram_prob(train_model_name, test_file_name, n, delta):
                        tmp_count = model_count[index]
                        this_item_total_count += tmp_count
 
-                    print "###this_item_total_count", this_item_total_count
+                    #print "###this_item_total_count", this_item_total_count
                     this_probability = (exact_count + delta) / (this_item_total_count + delta * vocabulary_count)
-                    print "###this probability ", this_probability
+                    #print "###this probability ", this_probability
             # not in this list, but contain the context(OOV)
             elif nset[0:n - 1] in [word[0:n - 1] for word in model_gram]:
                 context_total_count = 0
@@ -280,11 +280,11 @@ def get_ngram_prob(train_model_name, test_file_name, n, delta):
                 this_probability = 1.0 / vocabulary_count
 
             line_probability *= this_probability
-        print "line_probability = ", math.log(line_probability, 10)
+        #print "line_probability = ", math.log(line_probability, 10)
 
         probability += math.log(line_probability, 10)
 
-    print 'n-gram probability = ', probability
+    #print 'n-gram probability = ', probability
     return probability
 
 
@@ -384,12 +384,15 @@ def parse_parameter(argv):
 # # Main function, entry for this file
 if __name__ == "__main__":
 
+    # uncomment if you want to parse the parameter from commander line
+    #trainfile, testfile, n, modelfile, smooth = parse_parameter(sys.argv[1:])
 
     if TEST == True:
         debug()
         test_case()
 
-    n = 1
+    # modify this to your settings
+    n = 3
     trainfile = 'sample-training-data.txt'
     modelfile = 'modelfile'
     testfile = 'sample-test-data.txt'
@@ -401,6 +404,7 @@ if __name__ == "__main__":
         save_training_model(n, trainfile, modelfile)
         print "complete"
     if testfile:
+        print "testing..."
         likelihood = 0.0
         if n == 1:
             likelihood = get_unigram_prob(modelfile, testfile, smooth)
