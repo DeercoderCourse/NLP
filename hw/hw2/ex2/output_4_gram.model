@@ -1,3 +1,4 @@
+['<\\', 'that', 'will', 'bring']	1
 ['that', 'will', 'bring', 'the']	1
 ['will', 'bring', 'the', 'total']	1
 ['bring', 'the', 'total', 'for']	1
@@ -12,9 +13,7 @@
 ['from', 'five', 'during', 'fiscal']	1
 ['five', 'during', 'fiscal', '1989']	1
 ['during', 'fiscal', '1989', '.']	1
-['fiscal', '1989', '.', 'this']	1
-['1989', '.', 'this', 'portends']	1
-['.', 'this', 'portends', 'consequences']	1
+['<\\', 'this', 'portends', 'consequences']	1
 ['this', 'portends', 'consequences', 'from']	1
 ['portends', 'consequences', 'from', 'what']	1
 ['consequences', 'from', 'what', 'we']	1
@@ -32,9 +31,7 @@
 ['to', 'social', 'and', 'economic']	1
 ['social', 'and', 'economic', 'systems']	1
 ['and', 'economic', 'systems', '.']	1
-['economic', 'systems', '.', 'oncor']	1
-['systems', '.', 'oncor', 'inc.']	1
-['.', 'oncor', 'inc.', ',']	1
+['<\\', 'oncor', 'inc.', ',']	1
 ['oncor', 'inc.', ',', 'gaithersburg']	1
 ['inc.', ',', 'gaithersburg', ',']	1
 [',', 'gaithersburg', ',', 'md.']	1
@@ -68,9 +65,7 @@
 ['of', 'leukemia', 'and', 'lymph']	1
 ['leukemia', 'and', 'lymph', 'cancer']	1
 ['and', 'lymph', 'cancer', '.']	1
-['lymph', 'cancer', '.', 'when']	1
-['cancer', '.', 'when', 'a']	1
-['.', 'when', 'a', 'court']	1
+['<\\', 'when', 'a', 'court']	1
 ['when', 'a', 'court', 'decides']	1
 ['a', 'court', 'decides', 'that']	1
 ['court', 'decides', 'that', 'a']	1
@@ -113,9 +108,7 @@
 ['covered', 'by', 'the', 'expanded']	1
 ['by', 'the', 'expanded', 'rule']	1
 ['the', 'expanded', 'rule', '.']	1
-['expanded', 'rule', '.', 'last']	1
-['rule', '.', 'last', 'summer']	1
-['.', 'last', 'summer', ',']	1
+['<\\', 'last', 'summer', ',']	1
 ['last', 'summer', ',', 'in']	1
 ['summer', ',', 'in', 'response']	1
 [',', 'in', 'response', 'to']	1
@@ -160,9 +153,7 @@
 ['or', 'when', 'it', 'will']	1
 ['when', 'it', 'will', 'arrive']	1
 ['it', 'will', 'arrive', '.']	1
-['will', 'arrive', '.', 'harold']	1
-['arrive', '.', 'harold', 'jones']	1
-['.', 'harold', 'jones', ',']	1
+['<\\', 'harold', 'jones', ',']	1
 ['harold', 'jones', ',', 'lincoln']	1
 ['jones', ',', 'lincoln', "'s"]	1
 [',', 'lincoln', "'s", 'chief']	1
@@ -196,9 +187,7 @@
 ['arrive', 'later', 'in', 'the']	1
 ['later', 'in', 'the', 'week']	1
 ['in', 'the', 'week', '.']	1
-['the', 'week', '.', 'in']	1
-['week', '.', 'in', 'a']	1
-['.', 'in', 'a', 'move']	1
+['<\\', 'in', 'a', 'move']	1
 ['in', 'a', 'move', 'that']	1
 ['a', 'move', 'that', 'could']	1
 ['move', 'that', 'could', 'pose']	1
@@ -236,9 +225,7 @@
 ['inc.', 'for', '$', '225']	1
 ['for', '$', '225', 'million']	1
 ['$', '225', 'million', '.']	1
-['225', 'million', '.', 'the']	1
-['million', '.', 'the', 'oil']	1
-['.', 'the', 'oil', 'and']	1
+['<\\', 'the', 'oil', 'and']	1
 ['the', 'oil', 'and', 'auto']	1
 ['oil', 'and', 'auto', 'industries']	1
 ['and', 'auto', 'industries', ',']	1
@@ -272,9 +259,7 @@
 ['turn', 'up', 'a', 'cleaner-burning']	1
 ['up', 'a', 'cleaner-burning', 'gasoline']	1
 ['a', 'cleaner-burning', 'gasoline', '.']	1
-['cleaner-burning', 'gasoline', '.', 'the']	1
-['gasoline', '.', 'the', 'derivative']	1
-['.', 'the', 'derivative', 'mortgage-backed']	1
+['<\\', 'the', 'derivative', 'mortgage-backed']	1
 ['the', 'derivative', 'mortgage-backed', 'market']	1
 ['derivative', 'mortgage-backed', 'market', 'revived']	1
 ['mortgage-backed', 'market', 'revived', 'after']	1
@@ -304,9 +289,7 @@
 ['that', 'could', 'be', 'priced']	1
 ['could', 'be', 'priced', 'today']	1
 ['be', 'priced', 'today', '.']	1
-['priced', 'today', '.', 'japanese']	1
-['today', '.', 'japanese', 'air-conditioner']	1
-['.', 'japanese', 'air-conditioner', 'maker']	1
+['<\\', 'japanese', 'air-conditioner', 'maker']	1
 ['japanese', 'air-conditioner', 'maker', 'daikin']	1
 ['air-conditioner', 'maker', 'daikin', 'industries']	1
 ['maker', 'daikin', 'industries', 'ltd.']	1
