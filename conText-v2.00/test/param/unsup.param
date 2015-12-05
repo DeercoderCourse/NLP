@@ -1,0 +1,30 @@
+#####
+#####  IMDB, Elec, and RCV1: Parameters for tv-embedding learning with unlabele data
+#####
+
+NoCusparseIndex   # Do not use cusparse row indexing as it is very slow in this setting. 
+zero_Y_weight=0.2 # Set negative example weight to 0.2 (vs. positive example weight set to 1)
+zero_Y_ratio=5    # Sample negative examples so that #(negatvie) is about 5 times more than #(positive)
+
+0resnorm_type=Cross 
+0resnorm_alpha=1
+0resnorm_beta=0.5
+
+NoTest
+Regression
+
+loss=Square
+step_size_scheduler=Few
+step_size_decay=0.1
+inc=500000          # Show progress every time 500000 examples are processed. 
+datatype=sparse
+x_ext=.xsmat
+y_ext=.ysmat
+
+layers=1
+mini_batch_size=100 
+step_size=0.5       # Learning rate
+momentum=0.9
+reg_L2=0            # No regularization 
+activ_type=Rect     # Rectifier
+random_seed=1

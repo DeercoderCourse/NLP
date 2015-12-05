@@ -1,0 +1,36 @@
+#---  Parameters used for seq-CNN on IMDB and Elec and bow-CNN on RCV1. 
+#---  Other parameters are specified in *.sh.   
+
+loss=Square             # Square loss. 
+num_iterations=100      # 100 epochs
+step_size_scheduler=Few # Step-size scheduler type: "Few": reduce step-size a few times. 
+step_size_decay=0.1     #   Reduce step size by multiplying 0.1 
+step_size_decay_at=80   #     after 80 epochs. 
+                        # To reduce step-size more than once, use "_" as delimiter, "e.g., step_size_decat_at=80_90" 
+                        #    reduces step-size after the 80-th epoch and after the 90-th epoch.  
+mini_batch_size=100     # Mini-batch size for mini-batch SGD
+layers=1                # One hidden layer (the top layer is excluded from this number) 
+random_seed=1
+
+#---  dataset type 
+datatype=sparse         # Sparse data 
+x_ext=.xsmatvar         # Feature filename extension
+                        #    "xsmatvar" indicates that the file is sparse variable-sized data format. 
+y_ext=.y                # Target filename extension 
+
+#-----  Layer-specific parameters 
+# The following parameters can be specified for a specific layer by attaching a layer id to the front of the keyword 
+# (e.g., "0activ_type=Rect" for layer#0).  The parameters without a layer id are applied to all the applicable layers. 
+# If there are both, the parameter with a layer# supercedes the one without it.  
+#-----
+momentum=0.9            # Momentum 
+init_weight=0.01        # Weights are initialized by normal distribution with zero mean and standard deviation 0.01. 
+init_intercept=0        # Initial intercept
+
+activ_type=Rect         # Rectifier 
+
+# Response normalization 
+resnorm_type=Cross      # Cross-map    
+resnorm_alpha=1 resnorm_beta=0.5 
+
+

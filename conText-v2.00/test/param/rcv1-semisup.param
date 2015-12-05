@@ -1,0 +1,39 @@
+#---  RCV1
+#---  Parameters for supervised learning using what was learned from unlabeled data. 
+#---  What was learned from unlabeled data is given as a "side layer".  
+
+extension=multi_side # Use the extension that allows side layers and multi-connection. 
+layers=1
+loss=Square           # Square loss
+mini_batch_size=100
+momentum=0.9
+random_seed=1
+
+#---  
+x_ext=.xsmatvar
+y_ext=.y
+data_dir=data
+
+#---  Do 100 epochs and reduce step-size after 80 epochs by multiplying 0.1. 
+num_iterations=100
+step_size_scheduler=Few 
+step_size_decay=0.1
+step_size_decay_at=80
+
+#---  Parameters for layer-0
+0activ_type=Rect      # Rectifer 
+0nodes=1000           # 1000 neurons
+0resnorm_type=Cross   # Response normalization
+0resnorm_width=1000  
+0resnorm_alpha=1
+0resnorm_beta=0.5
+
+0pooling_type=Avg     # Average-pooling
+0num_pooling=10       #   with 10 unit 
+
+0num_sides=1          # There is one side layer. 
+0side0_Fixed           # Do not update the side layer weights. 
+
+
+
+
