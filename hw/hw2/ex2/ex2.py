@@ -287,15 +287,6 @@ def get_ngram_prob(train_model_name, test_file_name, n, delta):
     #print 'n-gram probability = ', probability
     return probability
 
-
-
-def train():
-    return 1
-
-
-def test():
-    return 1
-
 # # Test the result for x-gram algorithms
 def test_gram():
     result = load_text("sample-training-data.txt")

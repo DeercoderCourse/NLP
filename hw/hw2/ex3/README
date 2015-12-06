@@ -1,1 +1,32 @@
+README
+====
 
+The same as `ex2.py`, you can either run using the version with parse_parameter() or not
+
+For debugging convience, I fixed the parameter in the main function, so you can change the parameter in main(), then
+just run `ex3.py` to get the OOV version.
+
+
+##BUGFIX
+
+The main bug fix for ex3 is in the ex2.py, as my previous version has some calculation or parsing problem. So based on
+that, I used the ex2 and OOV method to do ex3, the basic flow should be:
+
+1) divide training.txt into 10% and 90% parts, I save them into two files
+2) relabel the 90% files, since they may contain words that in 10%, for these words, I marked them as "UNKNOW" or "UNKNOW_DOT"
+   the later one is used for marking sentence ends.
+3) Then I can use the new file to train model, just the same as ex2.py shows
+4) After generating the model, I should do the test, it's done in the following steps:
+    * preprocess the test.txt, for words in 10%-training file, I also marked them as `UNKNOW`
+    * use the marked-well new string to generate n-gram test sample
+    * for these grams, do the similar job as in ex2, count the number, divide by total with delta smoothing
+5) In the end I can get the probability.
+
+So what's difference between ex2.py and ex3.py, as I used ex2.py and add OOV method:
+1) train_unknow_model(): this is the NEW function I implement, I split the training dataset, set the "UNKNOW" marker,
+and then generate the models using some parameter like n, modelname...(remaining work is similar as ex2 shows, but I integrate
+them in this function)
+
+2) modify the get_unigram_prob() and get_ngram_prob(): these two functions don't need to set "UNKNOW" marker in ex2, but now
+as we have the 10%-OOV sets, before the testing, I set the marker for each test sentence, then get the grams to calculate the
+probability, remaining part is also the same.
