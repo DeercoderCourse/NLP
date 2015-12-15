@@ -16,39 +16,39 @@
 
   options="LowerCase UTF8"
 
-  voc123=data/imdb_trn-123gram.vocab
-  rm -f $voc123
-  for nn in 1 2 3; do
+  voc12=data/imdb_trn-12gram.vocab
+  rm -f $voc12
+  for nn in 1 2; do
     vocab_fn=data/imdb_trn-${nn}gram.vocab  
     $prep_exe gen_vocab input_fn=data/imdb-train.txt.tok vocab_fn=$vocab_fn \
                               $options WriteCount n=$nn
-    cat $vocab_fn >> $voc123
+    cat $vocab_fn >> $voc12
   done 
 
-  #--- Step 1.2, Generate 4,5,6-gram for NB weights (Chang)
-  voc456=data/imdb_trn-456gram.vocab
-  rm -f $voc456
-  for nn in 4 5 6; do
+  #--- Step 1.2, Generate 3,4-gram for NB weights (Chang)
+  voc34=data/imdb_trn-34gram.vocab
+  rm -f $voc34
+  for nn in 3 4; do
     vocab_fn=data/imdb_trn-${nn}gram.vocab  
     $prep_exe gen_vocab input_fn=data/imdb-train.txt.tok vocab_fn=$vocab_fn \
                               $options WriteCount n=$nn
-    cat $vocab_fn >> $voc456
+    cat $vocab_fn >> $voc34
   done 
   #--- Step 1.2, ends
 
   #---  Step 2-1. Generate NB-weights 
   echo Generating NB-weights ... 
   $prep_exe gen_nbw \
-       vocab_fn=$voc123 \
+       vocab_fn=$voc12 \
        train_fn=data/imdb-train \
        $options text_fn_ext=.txt.tok label_fn_ext=.cat \
        label_dic_fn=data/imdb_cat.dic \
        nbw_fn=data/imdb.nbw3.dmat
 
-  #---  Step 2-1-2. Generate NB-weights for 4,5,6-gram (Chang)
+  #---  Step 2-1-2. Generate NB-weights for 3,4-gram (Chang)
   echo Generating NB-weights ... 
   $prep_exe gen_nbw \
-       vocab_fn=$voc456 \
+       vocab_fn=$voc34 \
        train_fn=data/imdb-train \
        $options text_fn_ext=.txt.tok label_fn_ext=.cat \
        label_dic_fn=data/imdb_cat.dic \
@@ -61,7 +61,7 @@
   echo Generating NB-weighted bag-of-ngram files ... 
   for set in train test; do
     $prep_exe gen_nbwfeat \
-       vocab_fn=$voc123 \
+       vocab_fn=$voc12 \
        input_fn=data/imdb-${set} \
        output_fn_stem=data/imdb_${set}-nbw3 \
        x_ext=.xsmatvar \
@@ -70,12 +70,12 @@
        nbw_fn=data/imdb.nbw3.dmat
   done
 
-  #---  Step 2-2.  Generate NB-weighted bag-of-ngram files for 4,5,6(Chang) ...
+  #---  Step 2-2.  Generate NB-weighted bag-of-ngram files for 3,4(Chang) ...
   echo 
   echo Generating NB-weighted bag-of-ngram files ... 
   for set in train test; do
     $prep_exe gen_nbwfeat \
-       vocab_fn=$voc456 \
+       vocab_fn=$voc34 \
        input_fn=data/imdb-${set} \
        output_fn_stem=data/imdb_${set}-nbw6 \
        x_ext=.xsmatvar \

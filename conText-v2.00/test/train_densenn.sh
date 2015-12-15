@@ -3,11 +3,11 @@
   ####         for_baselines_imdb.sh, for_baselines_elec.sh, and for_baselines_rcv1.sh
   ####
   
-#  ./for_baselines_imdb.sh  # <= uncomment this if you haven't run it yet. 
-#  ./for_baselines_elec.sh  # <= uncomment this if you haven't run it yet. 
-#  ./for_baselines_rcv1.sh  # <= uncomment this if you haven't run it yet. 
+  ./for_baselines_imdb.sh  # <= uncomment this if you haven't run it yet. 
+  ./for_baselines_elec.sh  # <= uncomment this if you haven't run it yet. 
+  ./for_baselines_rcv1.sh  # <= uncomment this if you haven't run it yet. 
 
-  gpu=-1  # <= change this to, e.g., "gpu=0" to use a specific GPU. 
+  gpu=0  # <= change this to, e.g., "gpu=0" to use a specific GPU. 
 
   typ=bow3
 
