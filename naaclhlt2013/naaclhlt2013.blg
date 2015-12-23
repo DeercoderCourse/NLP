@@ -1,0 +1,63 @@
+This is BibTeX, Version 0.99d (TeX Live 2015/Debian)
+Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
+The top-level auxiliary file: naaclhlt2013.aux
+The style file: naaclhlt2013.bst
+I found no \citation commands---while reading file naaclhlt2013.aux
+Database file #1: cnn.bib
+You're missing a field name---line 15 of file cnn.bib
+ : 
+ : %  title={Improving neural networks by preventing co-adaptation of feature detectors},
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
+You're missing a field name---line 22 of file cnn.bib
+ : 
+ : %  title={Imagenet classification with deep convolutional neural networks},
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
+You're missing a field name---line 30 of file cnn.bib
+ : 
+ : %  title={Baselines and bigrams: Simple, good sentiment and topic classification},
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
+You've used 0 entries,
+            2490 wiz_defined-function locations,
+            551 strings with 4477 characters,
+and the built_in function-call counts, 23 in all, are:
+= -- 0
+> -- 0
+< -- 0
++ -- 0
+- -- 0
+* -- 1
+:= -- 10
+add.period$ -- 0
+call.type$ -- 0
+change.case$ -- 0
+chr.to.int$ -- 0
+cite$ -- 0
+duplicate$ -- 0
+empty$ -- 1
+format.name$ -- 0
+if$ -- 2
+int.to.chr$ -- 1
+int.to.str$ -- 0
+missing$ -- 0
+newline$ -- 3
+num.names$ -- 0
+pop$ -- 0
+preamble$ -- 1
+purify$ -- 0
+quote$ -- 0
+skip$ -- 2
+stack$ -- 0
+substring$ -- 0
+swap$ -- 0
+text.length$ -- 0
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 0
+warning$ -- 0
+while$ -- 0
+width$ -- 0
+write$ -- 2
+(There were 4 error messages)
