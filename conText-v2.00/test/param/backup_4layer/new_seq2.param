@@ -1,0 +1,41 @@
+#---  Parameters for seq2-CNN on IMDB and Elec 
+extension=multi         # There are multiple convolution layers in parallel.  
+conn0=0-top             # connect layer#0 to the top layer
+conn1=1-top             # connect layer#1 to the top layer
+conn2=2-top             # connect layer#1 to the top layer
+
+loss=Square             # Square loss. 
+num_iterations=100      # 100 epochs
+step_size_scheduler=Few # Step-size scheduler type: "Few": reduce step-size a few times. 
+step_size_decay=0.1     #   Reduce step size by multiplying 0.1 
+step_size_decay_at=80   #     after 80 epochs. 
+                        # To reduce step-size more than once, use "_" as delimiter, "e.g., step_size_decat_at=80_90" 
+                        #    reduces step-size after the 80-th epoch and after the 90-th epoch.  
+mini_batch_size=100     # Mini-batch size for mini-batch SGD
+layers=3                # Two hidden layer (the top layer is excluded from this number) 
+random_seed=1
+
+#---  dataset type 
+datatype=sparse_multi   # 
+x_ext=.xsmatvar         # Feature filename extension
+                        #    "xsmatvar" indicates that the file is sparse variable-sized data format. 
+y_ext=.y                # Target filename extension 
+
+#-----  Layer-specific parameters 
+# The following parameters can be specified for a specific layer by attaching a layer id to the front of the keyword 
+# (e.g., "0activ_type=Rect" for layer#0).  The parameters without a layer id are applied to all the layers. 
+# If there are both, the parameter with a layer# supercedes the one without it.  
+#-----
+0dataset_no=0           # feed layer#0 with dataset#0
+1dataset_no=1           # feed layer#1 with dataset#1
+2dataset_no=2           # feed layer#1 with dataset#1
+
+#---  The following parameters are shared by layer#0 and layer#1. 
+momentum=0.9            # Momentum 
+init_weight=0.01        # Weights are initialized by normal distribution with zero mean and standard deviation 0.01. 
+init_intercept=0        # Initial intercept
+
+resnorm_type=Cross resnorm_alpha=1 resnorm_beta=0.5
+pooling_type=Max        # Max-pooling
+num_pooling=1           #   with one pooling unit
+activ_type=Rect         # Rectifier 

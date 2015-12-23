@@ -111,7 +111,7 @@
   done
 
   #---  Step 5. Training and test using GPU
-  log_fn=log_output/imdb-seq2-bown.log
+  log_fn=log_output/imdb-seq2-bown-2way.log
   perf_fn=perf/imdb-seq2-bown-perf.csv
   echo 
   echo Training CNN and testing ... 

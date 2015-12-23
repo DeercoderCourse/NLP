@@ -1,0 +1,5 @@
+ ite,1,0.256093, test-loss,0.249525, perf:err,0.5
+ ite,25,0.0353399, test-loss,0.0746119, perf:err,0.08572
+ ite,50,0.0321728, test-loss,0.0749891, perf:err,0.08596
+ ite,75,0.0409884, test-loss,0.0729336, perf:err,0.08484
+ ite,100,0.0318385, test-loss,0.0727302, perf:err,0.08484
